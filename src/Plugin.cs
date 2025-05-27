@@ -27,6 +27,7 @@ public class Plugin : BasePlugin
         Harmony.CreateAndPatchAll(typeof(SpawnPatch));
         Harmony.CreateAndPatchAll(typeof(MainMenuPatch));
         Harmony.CreateAndPatchAll(typeof(GeneralManagerPatch));
+        Harmony.CreateAndPatchAll(typeof(DuckUIPatch));
             
         Log.LogInfo($"Plugin [{MyPluginInfo.PLUGIN_GUID}] has loaded!");
     }
