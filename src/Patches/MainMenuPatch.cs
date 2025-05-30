@@ -1,3 +1,4 @@
+using System;
 using HarmonyLib;
 using UnityEngine;
 
@@ -6,11 +7,16 @@ namespace PPDSAP.Patches;
 public class MainMenuPatch
 {
     public static GameObject NewGame;
-    
+    // public static bool Initialized = false;
+    // public static int Attempts = 0;
+
+    // [HarmonyPatch(typeof(IntroMenuScreen), "Update"), HarmonyPostfix]
     [HarmonyPatch(typeof(MainMenuManager), "Start"), HarmonyPrefix]
-    public static bool First()
+    public static void Update()
     {
-        // FindAndHide("PLAY_Button");
+        // if (Initialized) return;
+        // try
+        // {
         FindAndHide("MULTIPLAYER");
         FindAndHide("DLC1Button");
         FindAndHide("DLC2Button");
@@ -18,22 +24,29 @@ public class MainMenuPatch
         FindAndHide("DLC4Button");
         FindAndHide("RESUME_Button");
 
-        // var newGame = GetObject("SelectDLCS_Panel/PlayButton"); 
         NewGame = GetObject("PLAY_Button");
         NewGame.SetActive(false);
 
         var baseGameSelect = GetObject("BaseSet");
         baseGameSelect.GetComponent<SetToggle>().enabled = false;
-        
+
         var obj = GetObject("SelectDLCS_Panel");
         APGui.Offset = new Vector2(15, 250);
         obj.AddComponent<APGui>();
-        
-        return true;
+
+        //     Initialized = true;
+        // }
+        // catch (Exception e)
+        // {
+        //     Plugin.Log.LogError(e);
+        //     Plugin.Log.LogInfo($"Failed to grab objs, trying again | attempt #{Attempts}");
+        //     Attempts++;
+        //     // ignored
+        // }
     }
 
     public static GameObject GetObject(string name) => GameObject.Find(name);
-    public static void FindAndHide(string name) => GetObject(name).SetActive(false);
+    public static void FindAndHide(string name) => GetObject(name)?.SetActive(false);
 
     // [HarmonyPatch(typeof(SaveSlot), "LoadGame")]
     // [HarmonyPrefix]
