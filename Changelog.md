@@ -1,4 +1,4 @@
-# v0.1.2
+# v0.2.0
 
 - [Client] Ported mod from BepinEx modloader to Melon Loader
 - [Client] The duck's names in the pool will be random names from the multiworld
