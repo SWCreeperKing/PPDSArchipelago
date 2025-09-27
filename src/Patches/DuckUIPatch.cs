@@ -1,5 +1,5 @@
-using System.Linq;
 using HarmonyLib;
+using Il2Cpp;
 using static PPDSAP.ApDuckClient;
 using static PPDSAP.Locations;
 
@@ -13,8 +13,9 @@ public class DuckUIPatch
         __instance.duckArtwork.enabled = false;
         __instance.enabled = false;
         if (!DuckIdToLocationName.TryGetValue(__instance.ID, out var duckLocation)) return;
+        var duckId = Client!.Locations[duckLocation];
         __instance.enabled = true;
-        var has = Client!.MissingLocations.All(kv => kv.Value.LocationName != duckLocation);
+        var has = Client!.MissingLocations.All(kv => kv != duckId);
         var available = AvailableDuckIds.Contains(duckLocation);
         
         __instance.duckArtwork.enabled = available;

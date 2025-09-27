@@ -1,5 +1,6 @@
 using System;
 using HarmonyLib;
+using Il2Cpp;
 using static PPDSAP.ApDuckClient;
 using static PPDSAP.Locations;
 using Random = System.Random;
@@ -25,21 +26,18 @@ public class SpawnPatch
         if (duckId == "Random Duck")
         {
             duckId = LocationNameToDuckId[AvailableDuckIds[Random.Next(AvailableDuckIds.Count)]];
-            Plugin.Log.LogInfo($"chose from rand: {duckId}");
+            Plugin.Log.Msg($"chose from rand: {duckId}");
         }
         else
         {
             var locationName = DuckIdToLocationName[duckId];
             var id = LocationNameToId[locationName];
-            Plugin.Log.LogInfo($"sending new duck {duckId} = {locationName} = {id}");
-            if (Client!.MissingLocations.ContainsKey(id))
-            {
-                Client.SendLocation(id);
-            }
+            Plugin.Log.Msg($"sending new duck {duckId} = {locationName} = {id}");
+            Client!.SendLocation(locationName);
         }
 
         // Plugin.Log.LogInfo("new duck done");
-        Plugin.Log.LogInfo($"Spawning: [{DuckIdToLocationName[duckId]}]");
+        Plugin.Log.Msg($"Spawning: [{DuckIdToLocationName[duckId]}]");
         return true;
     }
 }

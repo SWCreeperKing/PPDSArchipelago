@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using CreepyUtil.Archipelago;
+using Il2Cpp;
 using PPDSAP.Patches;
 using UnityEngine;
 using static Archipelago.MultiClient.Net.Enums.ItemsHandlingFlags;
@@ -28,14 +29,18 @@ public static class ApDuckClient
         try
         {
             Client = new ApClient();
-            Plugin.Log.LogInfo($"Attempting to connect [{address}]:[{port}] [{password}] [{slot}]");
+            Plugin.Log.Msg($"Attempting to connect [{address}]:[{port}] [{password}] [{slot}]");
 
-            var connectError = Client.TryConnect(new LoginInfo(port, slot, address, password), 0x0BF6E0BB,
+            Client.OnConnectionErrorReceived += (exception, message) => Plugin.Log.Error($"{exception}\n{message}");
+            Client.ItemsSentNotification += s => Plugin.Log.Msg(s);
+
+            var connectError = Client.TryConnect(new LoginInfo(port, slot, address, password),
                 "Placid Plastic Duck Simulator", AllItems);
 
             if (connectError is not null && connectError.Length > 0)
             {
-                Plugin.Log.LogInfo($"There was an Error");
+                Plugin.Log.Msg($"There was an Error");
+                Plugin.Log.Error(string.Join("\n", connectError));
                 Disconnect();
                 return connectError;
             }
@@ -45,7 +50,7 @@ public static class ApDuckClient
         }
         catch (Exception e)
         {
-            Plugin.Log.LogInfo("There was an Error");
+            Plugin.Log.Msg("There was an Error");
             Disconnect();
             return [e.Message, e.StackTrace!];
         }
@@ -57,14 +62,14 @@ public static class ApDuckClient
     {
         Client?.TryDisconnect();
         Client = null;
-        Plugin.Log.LogInfo("Disconnected");
+        Plugin.Log.Msg("Disconnected");
     }
 
-    public static void HasConnected() { Plugin.Log.LogInfo("Connnected"); }
+    public static void HasConnected() { Plugin.Log.Msg("Connnected"); }
 
     public static bool IsConnected()
     {
-        return Client is not null && Client.IsConnected && Client.Session.Socket.Connected;
+        return Client is not null && Client.IsConnected && Client.Session!.Socket.Connected;
     }
 
     public static void Reset()
@@ -128,11 +133,13 @@ public static class ApDuckClient
                 sl.AddRange(sArr);
                 return sl;
             });
-        Plugin.Log.LogInfo($"ducks available: [{string.Join(", ", AvailableDuckIds)}]");
-        UniqueDuckIds = AvailableDuckIds.Select(s => LocationNameToId[s]).ToList();
-        Plugin.Log.LogInfo($"ducks left before prune: [{string.Join(", ", UniqueDuckIds)}]");
-        UniqueDuckIds = UniqueDuckIds.Where(id => Client!.MissingLocations.ContainsKey(id)).ToList();
-        Plugin.Log.LogInfo($"ducks left: [{string.Join(", ", UniqueDuckIds)}]");
+        Plugin.Log.Msg($"ducks available: [{string.Join(", ", AvailableDuckIds)}]");
+        Plugin.Log.Msg($"ducks left before prune: [{string.Join(", ", UniqueDuckIds)}]");
+        UniqueDuckIds = AvailableDuckIds.Select(id => Client!.Locations[id])
+                                        .Where(id => Client!.MissingLocations.Contains(id))
+                                        .Select(id => LocationNameToId[Client!.Locations[id]])
+                                        .ToList();
+        Plugin.Log.Msg($"ducks left: [{string.Join(", ", UniqueDuckIds)}]");
     }
 
     public static string GetNeededDuck()
@@ -144,8 +151,8 @@ public static class ApDuckClient
 
         var randomId = UniqueDuckIds[SpawnPatch.Random.Next(UniqueDuckIds.Count)];
         UniqueDuckIds.Remove(randomId);
-        Plugin.Log.LogInfo($"ducks left: [{string.Join(", ", UniqueDuckIds)}]");
-        
+        Plugin.Log.Msg($"ducks left: [{string.Join(", ", UniqueDuckIds)}]");
+
         if (UniqueDuckIds.Count == 0 && ColumnCount == 9)
         {
             Client!.Goal();

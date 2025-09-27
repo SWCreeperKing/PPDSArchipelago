@@ -1,41 +1,28 @@
-﻿using System;
-using BepInEx;
-using BepInEx.Logging;
-using BepInEx.Unity.IL2CPP;
-using HarmonyLib;
-using Il2CppInterop.Runtime.Injection;
+﻿using Il2CppInterop.Runtime.Injection;
+using MelonLoader;
+using PPDSAP;
 using PPDSAP.Patches;
 
+[assembly: MelonInfo(typeof(Plugin), "PPDSAP", "1.0.0", "SW_CreeperKing", null)]
+[assembly: MelonGame("Turbolento Games", "Placid Plastic Duck Simulator")]
 namespace PPDSAP;
 
-[BepInPlugin(MyPluginInfo.PLUGIN_GUID, MyPluginInfo.PLUGIN_NAME, "0.1.0")]
-public class Plugin : BasePlugin
+public class Plugin : MelonMod
 {
-    public new static ManualLogSource Log;
+    public static MelonLogger.Instance Log;
 
-    public static event EventHandler<Plugin> Unloaded;
-
-    public override void Load()
+    public override void OnInitializeMelon()
     {
-        Log = base.Log;
+        Log = LoggerInstance;
 
-        Log.LogInfo($"Get dunc'd on");
-        Log.LogInfo($"Plugin [{MyPluginInfo.PLUGIN_GUID}] is loading!");
+        Log.Msg("Get dunc'd on");
         
-        ClassInjector.RegisterTypeInIl2Cpp<APGui>();
-        ClassInjector.RegisterTypeInIl2Cpp<ApDisconnectWarn>();
-        Harmony.CreateAndPatchAll(typeof(SpawnPatch));
-        Harmony.CreateAndPatchAll(typeof(MainMenuPatch));
-        Harmony.CreateAndPatchAll(typeof(GeneralManagerPatch));
-        Harmony.CreateAndPatchAll(typeof(DuckUIPatch));
+        HarmonyInstance.PatchAll(typeof(SpawnPatch));
+        HarmonyInstance.PatchAll(typeof(MainMenuPatch));
+        HarmonyInstance.PatchAll(typeof(GeneralManagerPatch));
+        HarmonyInstance.PatchAll(typeof(DuckUIPatch));
+        HarmonyInstance.PatchAll(typeof(DuckPatch));
             
-        Log.LogInfo($"Plugin [{MyPluginInfo.PLUGIN_GUID}] has loaded!");
-    }
-    
-    public override bool Unload()
-    {
-        Unloaded?.Invoke(this, this);
-        Log.LogInfo($"Plugin [{MyPluginInfo.PLUGIN_GUID}] has unloaded!");
-        return true;
+        LoggerInstance.Msg("Initialized.");
     }
 }

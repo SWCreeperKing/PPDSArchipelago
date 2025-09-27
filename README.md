@@ -4,15 +4,18 @@ A mod and APWorld made in 2 days with a lot of help
 ---
 
 ## How to install
-(tutorial totally not copy and pasted from Tunic AP mod)
+(tutorial totally not copy and pasted from Tunic AP mod and BTD6 Mod helper)
 
-- Download [BepInEx 6 IL2Cpp Bleeding Edge v.735](https://builds.bepinex.dev/projects/bepinex_be/735/BepInEx-Unity.IL2CPP-win-x64-6.0.0-be.735%2B5fef357.zip).
-- Extract the BepInEx zip folder you downloaded from the previous step into your game's install directory (For example: C:\Program Files (x86)\Steam\steamapps\common\Placid Plastic Duck Simulator)
-- Launch the game and close it. This will finalize the BepInEx installation.
-- Download and extract the `SW_CreeperKing.ArchipelagoMod.Zip` from the [latest release page](https://github.com/SWCreeperKing/PPDSArchipelago/releases/latest).
-    - Copy the `SW_CreeperKing.ArchipelagoMod` folder from the release zip into `BepInEx/plugins` under your game's install directory.
+- Make sure to have [.Net6.0](https://dotnet.microsoft.com/en-us/download/dotnet/6.0) installed
+- Download and Install [Melon Loader](https://melonwiki.xyz/#/?id=automated-installation).
+    - The default Vampire Survivors install directory (for steam): C:\Program Files (x86)\Steam\steamapps\common\Placid Plastic Duck Simulator
+    - Recommended melon version: 7.1
+- Launch the game and close it. This will finalize the Melon installation.
+- Download and extract the `SW_CreeperKing.ArchipelagoMod.zip` from
+  the [latest release page](https://github.com/SWCreeperKing/PPDSArchipelago/releases/latest).
+    - Copy the `SW_CreeperKing.ArchipelagoMod` folder from the release zip into `Mods` under your game's install directory.
 - Launch the game again and you should see the connection input on the top left of the title screen!
-- To uninstall the mod, either remove/delete the `SW_CreeperKing.ArchipelagoMod` folder from the plugins folder or rename the winhttp.dll file located in the game's root directory (this will disable all installed mods from running).
+- To uninstall the mod, either remove/delete the `SW_CreeperKing.ArchipelagoMod` folder
 
 ---
 

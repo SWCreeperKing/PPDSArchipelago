@@ -59,6 +59,9 @@ public static class Locations
         ["Computer Mouse Duck"] = 50,
         ["Gamer Duck"] = 51,
     };
+
+    public static Dictionary<int, string>
+        LocationIdToName = LocationNameToId.ToDictionary(kv => kv.Value, kv => kv.Key);
     
     public static Dictionary<int, string> IdToLocationName =
         LocationNameToId.ToDictionary(kv => kv.Value, kv => kv.Key);

@@ -1,11 +1,13 @@
 ﻿using System;
 using System.IO;
+using MelonLoader;
 using PPDSAP.Patches;
 using UnityEngine;
 
 namespace PPDSAP;
 
 // stolen from: https://github.com/FyreDay/TCG-CardShop-Sim-APClient/blob/master/APGui.cs
+[RegisterTypeInIl2Cpp]
 public class APGui : MonoBehaviour
 {
     public static bool ShowGUI = true;

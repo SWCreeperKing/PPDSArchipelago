@@ -1,7 +1,9 @@
+using MelonLoader;
 using UnityEngine;
 
 namespace PPDSAP;
 
+[RegisterTypeInIl2Cpp]
 public class ApDisconnectWarn : MonoBehaviour
 {
     public static GUIStyle TextStyle = new()
