@@ -8,7 +8,7 @@ A mod and APWorld made in 2 days with a lot of help
 
 - Make sure to have [.Net6.0](https://dotnet.microsoft.com/en-us/download/dotnet/6.0) installed
 - Download and Install [Melon Loader](https://melonwiki.xyz/#/?id=automated-installation).
-    - The default Vampire Survivors install directory (for steam): C:\Program Files (x86)\Steam\steamapps\common\Placid Plastic Duck Simulator
+    - The default Placid Plastic Duck Simulator install directory (for steam): C:\Program Files (x86)\Steam\steamapps\common\Placid Plastic Duck Simulator
     - Recommended melon version: 7.1
 - Launch the game and close it. This will finalize the Melon installation.
 - Download and extract the `SW_CreeperKing.ArchipelagoMod.zip` from

@@ -25,4 +25,10 @@ public class Plugin : MelonMod
             
         LoggerInstance.Msg("Initialized.");
     }
+
+    public override void OnUpdate()
+    {
+        if (GeneralManagerPatch.Manager is null) return;
+        ApDuckClient.Update(GeneralManagerPatch.Manager);
+    }
 }

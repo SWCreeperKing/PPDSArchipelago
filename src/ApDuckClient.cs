@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using CreepyUtil.Archipelago;
+using CreepyUtil.Archipelago.ApClient;
 using Il2Cpp;
 using PPDSAP.Patches;
 using UnityEngine;
@@ -69,7 +70,7 @@ public static class ApDuckClient
 
     public static bool IsConnected()
     {
-        return Client is not null && Client.IsConnected && Client.Session!.Socket.Connected;
+        return Client is not null && Client.IsConnected;
     }
 
     public static void Reset()
@@ -86,7 +87,7 @@ public static class ApDuckClient
 
         if (Client is null) return;
         Client.UpdateConnection();
-        if (Client?.Session?.Socket is null || !Client.IsConnected) return;
+        if (!Client.IsConnected) return;
 
         foreach (var item in Client.GetOutstandingItems())
         {
@@ -135,9 +136,8 @@ public static class ApDuckClient
             });
         Plugin.Log.Msg($"ducks available: [{string.Join(", ", AvailableDuckIds)}]");
         Plugin.Log.Msg($"ducks left before prune: [{string.Join(", ", UniqueDuckIds)}]");
-        UniqueDuckIds = AvailableDuckIds.Select(id => Client!.Locations[id])
-                                        .Where(id => Client!.MissingLocations.Contains(id))
-                                        .Select(id => LocationNameToId[Client!.Locations[id]])
+        UniqueDuckIds = AvailableDuckIds.Where(id => Client!.MissingLocations.Contains(id))
+                                        .Select(id => LocationNameToId[id])
                                         .ToList();
         Plugin.Log.Msg($"ducks left: [{string.Join(", ", UniqueDuckIds)}]");
     }
