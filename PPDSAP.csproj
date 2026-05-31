@@ -386,16 +386,20 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Include="src\ApDisconnectWarn.cs" />
-      <Compile Include="src\ApDuckClient.cs" />
-      <Compile Include="src\APGui.cs" />
-      <Compile Include="src\Locations.cs" />
-      <Compile Include="src\Patches\DuckPatch.cs" />
-      <Compile Include="src\Patches\DuckUIPatch.cs" />
-      <Compile Include="src\Patches\GeneralManagerPatch.cs" />
-      <Compile Include="src\Patches\MainMenuPatch.cs" />
-      <Compile Include="src\Patches\SpawnPatch.cs" />
-      <Compile Include="src\Plugin.cs" />
+      <Compile Include="Archipelago\ApDisconnectWarn.cs" />
+      <Compile Include="Archipelago\ApDuckClient.cs" />
+      <Compile Include="Archipelago\APGui.cs" />
+      <Compile Include="Core.cs" />
+      <Compile Include="HarmonySetup.cs" />
+      <Compile Include="Helper.cs" />
+      <Compile Include="KeyRegistry.cs" />
+      <Compile Include="Patches\DuckManagerPatch.cs" />
+      <Compile Include="Patches\DuckPatch.cs" />
+      <Compile Include="Patches\DuckUIPatch.cs" />
+      <Compile Include="Patches\GeneralManagerPatch.cs" />
+      <Compile Include="Patches\GetIdFromUI.cs" />
+      <Compile Include="Patches\MainMenuPatch.cs" />
+      <Compile Include="Patches\SpawnPatch.cs" />
     </ItemGroup>
 
     <PropertyGroup>
@@ -406,7 +410,7 @@
     <Target Name="CopyCustomContent" AfterTargets="AfterBuild">
         <Copy
                 SourceFiles="bin/Debug/net6.0/PPDSAP.dll"
-                DestinationFolder="../../Mods/SW_CreeperKing.ArchipelagoMod"
+                DestinationFolder="../../Mods"
         />
     </Target>
 </Project>

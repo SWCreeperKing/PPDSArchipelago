@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace PPDSAP.Patches;
 
+[PatchAll]
 public class MainMenuPatch
 {
     public static GameObject NewGame;
@@ -19,10 +20,6 @@ public class MainMenuPatch
         // try
         // {
         FindAndHide("MULTIPLAYER");
-        FindAndHide("DLC1Button");
-        FindAndHide("DLC2Button");
-        FindAndHide("DLC3Button");
-        FindAndHide("DLC4Button");
         FindAndHide("RESUME_Button");
 
         NewGame = GetObject("PLAY_Button");
@@ -56,18 +53,18 @@ public class MainMenuPatch
     //     // Plugin.Log.LogInfo($"DENIED | [{__instance.HasSave}]");
     //     return true;
     // }
-
+    //
     // [HarmonyPatch(typeof(LoadSavesScreen), "Start")]
     // public static bool LoadSaveStart(LoadSavesScreen __instance)
     // {
-    //     Plugin.Log.LogInfo($"Load/Save: [{(__instance._isSavePanel ? "Save" : "Load")}]");
+    //     // Core.Log.LogInfo($"Load/Save: [{(__instance._isSavePanel ? "Save" : "Load")}]");
     //     return true;
     // }
     //
     // [HarmonyPatch(typeof(SaveSlot), "PressLoad"), HarmonyPrefix]
     // public static bool SaveSelect(SaveSlot __instance)
     // {
-    //     Plugin.Log.LogInfo($"DENIED | [{__instance.ID}]");
+    //     // Plugin.Log.LogInfo($"DENIED | [{__instance.ID}]");
     //     if (!__instance.HasSave) return false;
     //     return true;
     // }
@@ -77,4 +74,21 @@ public class MainMenuPatch
 
     [HarmonyPatch(typeof(StagesScreen), "PrevStage"), HarmonyPrefix]
     public static bool StopPrevStage() { return false; }
+    
+    // [HarmonyPatch(typeof(StagesScreen), "NextStage"), HarmonyPostfix]
+    // public static void StopNextStage(StagesScreen __instance)
+    // {
+    //     
+    // }
+    //
+    // [HarmonyPatch(typeof(StagesScreen), "PrevStage"), HarmonyPostfix]
+    // public static void StopPrevStage(StagesScreen __instance)
+    // { 
+    // }
+    //
+    // [HarmonyPatch(typeof(StagesScreen), "OnButtonPlay"), HarmonyPrefix]
+    // public static bool ButtonPlay(StagesScreen __instance)
+    // {
+    //     return false;
+    // }
 }

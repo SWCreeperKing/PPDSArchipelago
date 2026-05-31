@@ -1,11 +1,10 @@
-using System;
 using HarmonyLib;
 using Il2Cpp;
-using JetBrains.Annotations;
 using UnityEngine;
 
 namespace PPDSAP.Patches;
 
+[PatchAll]
 public class GeneralManagerPatch
 {
     public static GeneralManager Manager;

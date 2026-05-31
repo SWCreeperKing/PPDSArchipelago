@@ -1,10 +1,10 @@
 using HarmonyLib;
 using Il2Cpp;
 using static PPDSAP.ApDuckClient;
-using static PPDSAP.Locations;
 
 namespace PPDSAP.Patches;
 
+[PatchAll]
 public class DuckUIPatch
 {
     [HarmonyPatch(typeof(DuckUI), "Update"), HarmonyPrefix]
@@ -12,10 +12,10 @@ public class DuckUIPatch
     {
         __instance.duckArtwork.enabled = false;
         __instance.enabled = false;
-        if (!DuckIdToLocationName.TryGetValue(__instance.ID, out var duckLocation)) return;
+        if (!DuckIdToName.TryGetValue(__instance.duckID, out var duckLocation)) return;
         __instance.enabled = true;
-        var has = Client!.MissingLocations.All(s => s != duckLocation);
-        var available = AvailableDuckIds.Contains(duckLocation);
+        var has = !Client!.MissingLocations.Contains(duckLocation);
+        var available = AvailableDuckIds.Contains(__instance.duckID);
         
         __instance.duckArtwork.enabled = available;
         if (!available) return;

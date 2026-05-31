@@ -17,32 +17,11 @@ public class APGui : MonoBehaviour
     public static string State = "";
     public static Vector2 Offset = Vector2.zero;
 
-    public static GUIStyle TextStyle = new()
-    {
-        fontSize = 12,
-        normal =
-        {
-            textColor = Color.white
-        }
-    };
+    public static GUIStyle TextStyle = new() { fontSize = 12, normal = { textColor = Color.white } };
 
-    public static GUIStyle TextStyleGreen = new()
-    {
-        fontSize = 12,
-        normal =
-        {
-            textColor = Color.green
-        }
-    };
+    public static GUIStyle TextStyleGreen = new() { fontSize = 12, normal = { textColor = Color.green } };
 
-    public static GUIStyle TextStyleRed = new()
-    {
-        fontSize = 12,
-        normal =
-        {
-            textColor = Color.red
-        }
-    };
+    public static GUIStyle TextStyleRed = new() { fontSize = 12, normal = { textColor = Color.red } };
 
     private void Awake()
     {
@@ -64,13 +43,13 @@ public class APGui : MonoBehaviour
 
         // Display text at position (10,10)
         GUI.Label(new Rect(20 + Offset.x, 40 + Offset.y, 300, 30), "Address:port", TextStyle);
-        Ipporttext = GUI.TextField(new Rect(20 + Offset.x, 60 + Offset.y, 180, 25), Ipporttext, 25);
+        Ipporttext = GUI.TextField(new Rect(20 + Offset.x, 60 + Offset.y, 180, 25), Ipporttext);
 
         GUI.Label(new Rect(20 + Offset.x, 90 + Offset.y, 300, 30), "Password", TextStyle);
-        Password = GUI.TextField(new Rect(20 + Offset.x, 110 + Offset.y, 180, 25), Password, 25);
+        Password = GUI.TextField(new Rect(20 + Offset.x, 110 + Offset.y, 180, 25), Password);
 
         GUI.Label(new Rect(20 + Offset.x, 140 + Offset.y, 300, 30), "Slot", TextStyle);
-        Slot = GUI.TextField(new Rect(20 + Offset.x, 160 + Offset.y, 180, 25), Slot, 25);
+        Slot = GUI.TextField(new Rect(20 + Offset.x, 160 + Offset.y, 180, 25), Slot);
 
         if (!ApDuckClient.IsConnected() && GUI.Button(new Rect(20 + Offset.x, 210 + Offset.y, 180, 30), "Connect"))
         {
@@ -86,6 +65,7 @@ public class APGui : MonoBehaviour
             if (error is not null)
             {
                 State = string.Join("\n", error);
+                Core.Log.Error(State);
                 return;
             }
 
