@@ -79,9 +79,9 @@ public static class ApDuckClient
         ColumnCount = 0;
         SpeedCount = 0;
         Timer = 0;
-        AvailableDuckIds = [];
+        AvailableDuckIds.Clear();
+        UniqueDuckIds.Clear();
         DlcItems.Clear();
-        UpdateColumns();
     }
 
     public static void Update(GeneralManager? manager)
@@ -158,7 +158,7 @@ public static class ApDuckClient
 
         Core.Log.Msg($"ducks available: [{string.Join(", ", AvailableDuckIds)}]");
         Core.Log.Msg($"ducks left before prune: [{string.Join(", ", UniqueDuckIds)}]");
-
+        
         UniqueDuckIds = AvailableDuckIds.Where(id => Client!.MissingLocations.Contains(DuckIdToName[id])).ToList();
 
         Core.Log.Msg($"ducks left: [{string.Join(", ", UniqueDuckIds)}]");

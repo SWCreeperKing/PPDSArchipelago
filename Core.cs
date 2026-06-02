@@ -33,31 +33,31 @@ public class Core : MelonMod
         
         LoggerInstance.Msg("Initialized.");
 
-        KeyRegistry.AddKey(
-            KeyCode.K, () =>
-            {
-                //         // var ducks = new Il2CppSystem.Collections.Generic.List<string>();
-                //         // ducks.Add();
-                //
-                //         // var spawnPoint = BasicSpawner.I.GeneralManager.SpawnPoint;
-                //         // var entries = GetIdFromUI.Entries.Keys.ToArray();
-                //         // var randDuck = GetIdFromUI.Entries[entries[new System.Random().Next(entries.Length)]];
-                //         //
-                //         // BasicSpawner.I.GeneralManager.
-                //         //
-                //         // var duck = randDuck.duckRef.Instantiate(spawnPoint.position, spawnPoint.rotation).Result;
-                //         // var manager = duck.GetComponent<DuckManager>();
-                //         // BasicSpawner.I.OnDuckSpawned?.Invoke(manager);
-                //         // var duck = randDuck.duckRef.Instantiate(spawnPoint.position, spawnPoint.rotation).Result;
-                //         // duck.GetComponent<DuckManager>().Spawned();
-                //
-                var spawner = BasicSpawner.I;
-                //         var unspawnable = ApDuckClient.DuckIdToName.Where(kv => !spawner.Ducks.ContainsKey(kv.Key)).Select(kv => kv.Value).ToArray();
-                //         Log.Msg($"Unspawnable: [{string.Join(", ", unspawnable)}]");
-
-                if (!spawner.Ducks.TryGetValue("", out var duck)) return;
-            }
-        );
+        // KeyRegistry.AddKey(
+        //     KeyCode.K, () =>
+        //     {
+        //         //         // var ducks = new Il2CppSystem.Collections.Generic.List<string>();
+        //         //         // ducks.Add();
+        //         //
+        //         //         // var spawnPoint = BasicSpawner.I.GeneralManager.SpawnPoint;
+        //         //         // var entries = GetIdFromUI.Entries.Keys.ToArray();
+        //         //         // var randDuck = GetIdFromUI.Entries[entries[new System.Random().Next(entries.Length)]];
+        //         //         //
+        //         //         // BasicSpawner.I.GeneralManager.
+        //         //         //
+        //         //         // var duck = randDuck.duckRef.Instantiate(spawnPoint.position, spawnPoint.rotation).Result;
+        //         //         // var manager = duck.GetComponent<DuckManager>();
+        //         //         // BasicSpawner.I.OnDuckSpawned?.Invoke(manager);
+        //         //         // var duck = randDuck.duckRef.Instantiate(spawnPoint.position, spawnPoint.rotation).Result;
+        //         //         // duck.GetComponent<DuckManager>().Spawned();
+        //         //
+        //         var spawner = BasicSpawner.I;
+        //         //         var unspawnable = ApDuckClient.DuckIdToName.Where(kv => !spawner.Ducks.ContainsKey(kv.Key)).Select(kv => kv.Value).ToArray();
+        //         //         Log.Msg($"Unspawnable: [{string.Join(", ", unspawnable)}]");
+        //
+        //         if (!spawner.Ducks.TryGetValue("", out var duck)) return;
+        //     }
+        // );
     }
 
     public override void OnUpdate()

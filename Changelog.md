@@ -1,3 +1,6 @@
+# v0.3.1
+- [Client] Fixed a bug that snuck passed preventing connection
+
 # v0.3.0
 - [ApWorld] Added most DLC ducks
 - [Client] Removed text field character limits
