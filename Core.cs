@@ -5,7 +5,7 @@ using PPDSAP.Patches;
 using Slimipelago;
 using UnityEngine;
 
-[assembly: MelonInfo(typeof(Core), "PPDSAP", "0.3.0", "SW_CreeperKing", null)]
+[assembly: MelonInfo(typeof(Core), "PPDSAP", "0.3.2pyc", "SW_CreeperKing", null)]
 [assembly: MelonGame("Turbolento Games", "Placid Plastic Duck Simulator")]
 
 namespace PPDSAP;

@@ -37,6 +37,7 @@ public static class ApDuckClient
 
             Client.OnConnectionErrorReceived += (exception, message) => Core.Log.Error($"{exception}\n{message}");
             Client.ItemsSentNotification += s => Core.Log.Msg(s);
+            Client.OnConnectionEvent += _ => UpdateColumns();
 
             var connectError = Client.TryConnect(
                 new LoginInfo(port, slot, address, password),

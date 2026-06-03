@@ -1,3 +1,6 @@
+# v0.3.2
+- [Client] Fixed a bug with the client not checking what ducks you could spawn on connect
+
 # v0.3.1
 - [Client] Fixed a bug that snuck passed preventing connection
 
